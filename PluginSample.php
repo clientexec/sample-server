@@ -2,7 +2,8 @@
 
 require_once 'modules/admin/models/ServerPlugin.php';
 
-class PluginSample extends ServerPlugin {
+class PluginSample extends ServerPlugin
+{
 
     public $features = [
         'packageName' => true,
@@ -200,7 +201,7 @@ class PluginSample extends ServerPlugin {
         return $values;
     }
 
-    public function getDirectLink($userPackage, $getRealLink = true)
+    public function getDirectLink($userPackage, $getRealLink = true, $fromAdmin = false, $isReseller = false)
     {
         $linkText = $this->user->lang('Login to Server');
         $args = $this->buildParams($userPackage);
@@ -219,5 +220,19 @@ class PluginSample extends ServerPlugin {
                 'form' => ''
             ];
         }
+    }
+
+    public function dopanellogin($args)
+    {
+        $userPackage = new UserPackage($args['userPackageId']);
+        $response = $this->getDirectLink($userPackage);
+        return $response['rawlink'];
+    }
+
+    public function dopanellogin_reseller($args)
+    {
+        $userPackage = new UserPackage($args['userPackageId']);
+        $response = $this->getDirectLink($userPackage, true, false, true);
+        return $response['rawlink'];
     }
 }
