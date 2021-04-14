@@ -117,6 +117,14 @@ class PluginSample extends ServerPlugin
         return 'Package has been created.';
     }
 
+    public function doUpdate($args)
+    {
+        $userPackage = new UserPackage($args['userPackageId']);
+        $args = $this->buildParams($userPackage);
+        $this->update($args);
+        return 'Package has been updated.';
+    }
+
     public function doSuspend($args)
     {
         $userPackage = new UserPackage($args['userPackageId']);
@@ -148,6 +156,29 @@ class PluginSample extends ServerPlugin
         // Call delete at the server
     }
 
+    public function update($args)
+    {
+        foreach ($args['changes'] as $key => $value) {
+            switch ($key) {
+                case 'username':
+                    // update username on server
+                    break;
+                case 'password':
+                    // update password on server
+                    break;
+                case 'domain':
+                    // update domain on server
+                    break;
+                case 'ip':
+                    // update ip on server
+                    break;
+                case 'package':
+                    // update package on server
+                    break;
+            }
+        }
+    }
+
     public function getAvailableActions($userPackage)
     {
         $args = $this->buildParams($userPackage);
@@ -175,19 +206,15 @@ class PluginSample extends ServerPlugin
 
         // call create at the server
         // If we need to store custom data for later
-        $userPackage->setCustomField('Server Acct Properties', 'Virtual Server Id');
+        $userPackage->setCustomField('Server Acct Properties', $externalServerId);
     }
 
     public function testConnection($args)
     {
-        CE_Lib::log(4, 'Testing connection to SolusVM server');
-        $this->setup($args);
+        CE_Lib::log(4, 'Testing connection to server');
 
-        $params = array();
-        $params['action'] = 'node-idlist';
-        // we send openvz, just as a test, to see if we can connect or not.
-        $params['type'] = 'openvz';
-        $response = $this->call($params, $args);
+        // if failed
+        throw new CE_Exception("Connection to server failed.");
     }
 
     public function getDropDownValues()
