@@ -9,7 +9,10 @@ class PluginSample extends ServerPlugin
         'testConnection' => true,
         'showNameservers' => false,
         'directlink' => true,
-        'upgrades' => true
+        'upgrades' => true,
+        'publicPanels' => [
+            'advanced' => 'Advanced'
+        ]
     ];
 
     public function getVariables()
