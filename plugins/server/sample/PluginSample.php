@@ -4,7 +4,6 @@ require_once 'modules/admin/models/ServerPlugin.php';
 
 class PluginSample extends ServerPlugin
 {
-
     public $features = [
         'packageName' => true,
         'testConnection' => true,
@@ -56,7 +55,7 @@ class PluginSample extends ServerPlugin
             'Actions' => [
                 'type' => 'hidden',
                 'description' => 'Current actions that are active for this plugin per server',
-                'value'=>'Create,Delete,Suspend,UnSuspend'
+                'value' => 'Create,Delete,Suspend,UnSuspend'
             ],
             'Registered Actions For Customer' => [
                 'type' => 'hidden',
@@ -238,13 +237,13 @@ class PluginSample extends ServerPlugin
             // call login at server
 
             return [
-                'link'    => '<li><a target="_blank" href="url to login">' .$linkText . '</a></li>',
+                'link'    => '<li><a target="_blank" href="url to login">' . $linkText . '</a></li>',
                 'rawlink' =>  'url to login',
                 'form'    => ''
             ];
         } else {
             return [
-                'link' => '<li><a target="_blank" href="index.php?fuse=clients&controller=products&action=openpackagedirectlink&packageId='.$userPackage->getId().'&sessionHash='.CE_Lib::getSessionHash().'">' .$linkText . '</a></li>',
+                'link' => '<li><a target="_blank" href="index.php?fuse=clients&controller=products&action=openpackagedirectlink&packageId=' . $userPackage->getId() . '&sessionHash=' . CE_Lib::getSessionHash() . '">' . $linkText . '</a></li>',
                 'form' => ''
             ];
         }
